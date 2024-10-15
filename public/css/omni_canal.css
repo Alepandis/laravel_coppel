@@ -1,0 +1,77 @@
+/*estilos omni_canal*/
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos de la barra de navegación */
+.navbar {
+    background-color: #003366; /* Color azul oscuro */
+    color: #d7dbdd;
+    display: flex;
+    justify-content: space-between; /* Mueve los elementos a la derecha */
+    align-items: center;
+    padding: 10px 20px;
+    font-family: Helvetica, monospace;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right i {
+    margin-left: 15px;
+}
+
+.icon-grid, .icon-logout {
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    margin-left: 15px;
+}
+
+/* Estilos del contenido principal */
+.main-content {
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    height: 80vh;
+    background-color: #f9f9f9;
+}
+
+/* Estilos de la tarjeta */
+
+.card-container {
+    display: flex; /* Utiliza flexbox para el contenedor de tarjetas */
+    justify-content: flex-start; /* Alinea el contenido al inicio (izquierda) */
+    margin-left: 200px;
+    margin-top: -135px;
+}
+
+.card {
+    background-color: #2471a3;
+    color: #ffffff;
+    width: 283px;
+    height: 200px;
+    padding: 20px;
+    text-align: center;
+    /* border-radius: 8px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
+}
+
+.card-icon h3 i{
+    margin-bottom: 15px;
+    margin-top: 10px;
+    font-size: 60px;
+}
+
+.card-title {
+    font-size: 20px;
+    /*font-weight: bold;*/
+    font-family: Helvetica, monospace;
+}
