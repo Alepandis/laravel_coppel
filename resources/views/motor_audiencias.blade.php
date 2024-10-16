@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Motor de Audiencias</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{{asset('css/omni_canal.css')}}">
+    <link rel="stylesheet" href="{{asset('css/motor_audiencias.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -25,35 +25,35 @@
         <div class="campanas">
             <p>Selecciona la estrategia de push a utilizar<p>
             
-                <input type="radio" name="categoria" value="Categoria"> Categoria <br>
-                <input type="radio" name="multicategoria" value="Multicategoria"> Multicategoria<br>
-                <input type="radio" name="corporate" value="Corporate"> Corporate Deal<br>
+                <input type="radio" id="categoria" name="categoria" class="solo-uno" value="Categoria"> Categoria <br>
+                <input type="radio" id="multicategoria" name="multicategoria" class="solo-uno" value="Multicategoria"> Multicategoria<br>
+                <input type="radio" name="corporate" class="solo-uno" value="Corporate"> Corporate Deal<br>
                 <input type="submit" value="Regresar">
-                <input type="submit" value="Continuar">
+                <input type="button" value="Continuar" id="btn_continuar">
                 <hr>
         </div>
-        <div>
-            <select name="categoria" id="categoria">
-                <option value="categoria">Categoria</option>
-            </select></br>
-            <input type="checkbox" name="almacenamiento" value="almacenamiento"> ALMACENAMIENTO <br>
-            <input type="checkbox" name="audio_video" value="audio_video">AUDIO Y VIDEO <br>
-            <input type="checkbox" name="automotriz" value="automotriz"> AUTOMOTRIZ <br>
-            <input type="checkbox" name="bebes" value="bebes"> BEBES <br>
-            <input type="checkbox" name="belleza" value="belleza"> BELLEZA Y CUIDADO PERSONAL <br>
-            <select>
-                <option value="clases_semilla">Clases semilla</option>
-            </select></br>
-            <input type="checkbox" name="accesorios" value="accesorios"> ACCESORIOS <br>
-            <input type="checkbox" name="acces_aut_electricos" value="acces_aut_electricos"> ACCESORIOS AUT ELECTRICOS <br>
-            <input type="checkbox" name="acces_aut_manuales" value="acces_aut_manuales"> ACESSORIOS AUT MANUALES <br>
-            <input type="checkbox" name="acces_automotriz" value="acces_automotriz"> ACCESORIOS AUTOMOTRIZ <br>
+        <div id="categoria_section">
+            <div>
+                <select name="categoria" id="categoria">
+                    <option value="categoria">Categoria</option>
+                </select></br>
+                <input type="checkbox" name="almacenamiento" value="almacenamiento"> ALMACENAMIENTO <br>
+                <input type="checkbox" name="audio_video" value="audio_video">AUDIO Y VIDEO <br>
+                <input type="checkbox" name="automotriz" value="automotriz"> AUTOMOTRIZ <br>
+                <input type="checkbox" name="bebes" value="bebes"> BEBES <br>
+                <input type="checkbox" name="belleza" value="belleza"> BELLEZA Y CUIDADO PERSONAL <br>
+            </div>
+            <div>
+                <select>
+                    <option value="clases_semilla">Clases semilla</option>
+                </select></br>
+                <input type="checkbox" name="accesorios" value="accesorios"> ACCESORIOS <br>
+                <input type="checkbox" name="acces_aut_electricos" value="acces_aut_electricos"> ACCESORIOS AUT ELECTRICOS <br>
+                <input type="checkbox" name="acces_aut_manuales" value="acces_aut_manuales"> ACESSORIOS AUT MANUALES <br>
+                <input type="checkbox" name="acces_automotriz" value="acces_automotriz"> ACCESORIOS AUTOMOTRIZ <br>
+            </div>
         </div>
-        <div>
-            <input type="checkbox" name="especial_fin" value="especial_fin"> Especial fin de semana <br>
-            <input type="checkbox" name="prueba_ab" value="prueba_ab"> Prueba A/B <br>
-        </div>
-        <div>
+        <div id="multicategoria_section">
             <select name="multi_categoria" id="multi_categoria">
                 <option value="multi_categoria">Categoria</option>
             </select></br>
@@ -70,7 +70,7 @@
             <input type="checkbox" name="acces_aut_manuales" value="acces_aut_manuales"> ACESSORIOS AUT MANUALES <br>
             <input type="checkbox" name="acces_automotriz" value="acces_automotriz"> ACCESORIOS AUTOMOTRIZ <br>
         </div>
-        <div>
+        <div id="corporate_section">
             <select name="marca" id="marca">
                 <option value="marca">Marca</option>
             </select><br>
@@ -87,6 +87,10 @@
             <input type="checkbox" name="automotriz" value="automotriz"> AUTOMOTRIZ <br>
             <input type="checkbox" name="bebes" value="bebes"> BEBES <br>
             <input type="checkbox" name="belleza" value="belleza"> BELLEZA Y CUIDADO PERSONAL <br>
+        </div>
+        <div>
+            <input type="checkbox" name="especial_fin" value="especial_fin"> Especial fin de semana <br>
+            <input type="checkbox" name="prueba_ab" value="prueba_ab"> Prueba A/B <br>
         </div>
         <div>
             <input type="text" id="camp_name_int" name="camp_name_int" value="Titulo interno de campaña"><br><br>
@@ -274,6 +278,32 @@
     </form>
     <script>
         $(document).ready(function() {
+            $('#categoria_section').hide();
+
+            $('#multicategoria_section').hide();
+
+            $('#corporate_section').hide();
+
+            $('.solo-uno').on('change', function() {
+                $('.solo-uno').not(this).prop('checked', false);
+            });
+
+            $('#btn_continuar').click(function(){
+                if($('#categoria').is(':checked')){
+                    $('#categoria_section').show();
+                    $('#multicategoria_section').hide();
+                    $('#corporate_section').hide();
+                }else if($('#multicategoria').is(':checked')){
+                    $('#multicategoria_section').show();
+                    $('#categoria_section').hide();
+                    $('#corporate_section').hide();
+                }else{
+                    $('#corporate_section').show();
+                    $('#multicategoria_section').hide();
+                    $('#categoria_section').hide();
+                }
+            });
+
             $('#campanasForm').on('submit', function(e) {
                 e.preventDefault(); // Evitar el envío del formulario predeterminado
 

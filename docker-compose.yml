@@ -1,0 +1,63 @@
+version: '3.9'
+
+services:
+  laravel:
+    image: bitnami/laravel:latest
+    command: 'de Alejandra/myapp/project_coppel:/app --network=laravel-network --workdir=/app -p 8000:8000 --restart=no --label="org.opencontainers.image.base.name=docker.io/bitnami/minideb:bullseye" --label="org.opencontainers.image.created=2023-07-12T01:00:35Z" --label="org.opencontainers.image.description=Application packaged by VMware, Inc" --label="org.opencontainers.image.licenses=Apache-2.0" --label="org.opencontainers.image.ref.name=10.2.5-debian-11-r0" --label="org.opencontainers.image.title=laravel" --label="org.opencontainers.image.vendor=VMware, Inc." --label="org.opencontainers.image.version=10.2.5" --runtime=runc -d bitnami/laravel:latest'
+    volumes:
+      - /Users/alejandramartinezruiz/Documents/Documentos:/app
+    environment:
+      - PHP_ENABLE_OPCACHE=0
+      - NODE_PATH=/opt/bitnami/node/lib/node_modules
+      - BITNAMI_APP_NAME=laravel
+      - APP_VERSION=10.2.5
+      - OS_NAME=linux
+      - OS_FLAVOUR=debian-11
+      - OS_ARCH=arm64
+      - PATH=/opt/bitnami/python/bin:/opt/bitnami/php/bin:/opt/bitnami/php/sbin:/opt/bitnami/node/bin:/opt/bitnami/common/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - DB_DATABASE=bitnami_myapp
+      - DB_USERNAME=bn_myapp
+      - DB_PORT=3306
+      - DB_HOST=mariadb
+    hostname: 85761596d6e5
+    networks:
+      - laravel-network
+
+  mariadb:
+    image: bitnami/mariadb:latest
+    labels:
+      - org.opencontainers.image.version=11.4.3
+      - org.opencontainers.image.vendor=Broadcom, Inc.
+      - org.opencontainers.image.title=mariadb
+      - org.opencontainers.image.source=https://github.com/bitnami/containers/tree/main/bitnami/mariadb
+      - org.opencontainers.image.ref.name=11.4.3-debian-12-r2
+      - org.opencontainers.image.licenses=Apache-2.0
+      - org.opencontainers.image.documentation=https://github.com/bitnami/containers/tree/main/bitnami/mariadb/README.md
+      - org.opencontainers.image.description=Application packaged by Broadcom, Inc.
+      - org.opencontainers.image.created=2024-10-04T06:59:17Z
+      - org.opencontainers.image.base.name=docker.io/bitnami/minideb:bookworm
+      - com.vmware.cp.artifact.flavor=sha256:c50c90cfd9d12b445b011e6ad529f1ad3daea45c26d20b00732fae3cd71f6a83
+    restart: no
+    networks:
+      - laravel-network
+    volumes:
+      - mariadb_data:/bitnami/mariadb
+    environment:
+      - BITNAMI_APP_NAME=mariadb
+      - APP_VERSION=11.4.3
+      - OS_NAME=linux
+      - OS_FLAVOUR=debian-12
+      - OS_ARCH=arm64
+      - HOME=/
+      - PATH=/opt/bitnami/common/bin:/opt/bitnami/common/sbin:/opt/bitnami/mariadb/bin:/opt/bitnami/mariadb/sbin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_DATABASE=bitnami_myapp
+      - MARIADB_USER=bn_myapp
+    user: '1001'
+    hostname: fb62e9f77d04
+
+networks:
+  laravel-network: {}
+
+volumes:
+  mariadb_data:
