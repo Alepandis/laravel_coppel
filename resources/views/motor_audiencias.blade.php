@@ -274,7 +274,7 @@
                 </select></br>
             </div>
         </div>
-        <input type="submit" value="Generar JSON">
+        <input type="submit" id='btn_json' value="Generar JSON">
     </form>
     <script>
         $(document).ready(function() {
@@ -333,7 +333,7 @@
                 });
             });
         });
-        
+
     </script>
 </body>
 </html>
